@@ -12,38 +12,45 @@ September 2018
 #include <getopt.h>
 
 
-/* User getopt: 
-	 -n x:
-	 -h: display help message indicating type of input needed
-	 -p: uses perror to generate a test error message as describes in task4
-*/
+
+void processes(int n, pid_t childpid)
+{
+        int i;
+        for (i = 1; i < n; i++)  
+                if ((childpid = fork()))
+                        break;
+                                
+        fprintf(stderr, "i:%d process ID:%ld parent ID:%ld child ID:%ld\n",i, (long)getpid(), (long)getppid(), (long)childpid);
+}
+    
+
 
 
 int main (int argc, char *argv[]) 
 {
 	pid_t childpid = 0;
-	int i, n; 	
-
-	/* Attempt 1 at get opt */
-	/* optopt: when getopt stumbles on an unknown option char or with a missing arg */
-
 	int option;
 
-	while((option = getopt(argc, argv, "hpn")) != -1)
+	while((option = getopt(argc, argv, "hpn:")) != -1)
 	{
 		switch (option)
 			{
 			case 'h':
-				fprintf(stderr, "You have selected H");
-				break;	
+				fprintf(stderr, "Help Message: Valid inputs are as followed\n");
+				fprintf(stderr, "-n x: x being an integer\n");
+				fprintf(stderr, "-h: displays help message\n");
+				fprintf(stderr, "-p: generates a test error message\n");
+				exit(1);	
 			case 'p':
-				fprintf(stderr, "You have selected P");
+				fprintf(stderr, "%s ", argv[0]);
+				perror("Error: Detailed error message");
 				break;
 			case 'n':
-                                fprintf(stderr, "You have selected N");
+                                fprintf(stderr, "You have selected N\n");
+				processes(atoi(optarg), childpid);
                                 break;
 			case '?':
-				fprintf(stderr, "Error");
+				fprintf(stderr, "Error\n");
 				break;
 			}
 	}
@@ -56,15 +63,13 @@ int main (int argc, char *argv[])
  		return 1;
  	}
 
- 	n = atoi(argv[1]);
- 
-	for (i = 1; i < n; i++)
-		if ((childpid = fork()))
- 			break;
- 
-	fprintf(stderr, "i:%d process ID:%ld parent ID:%ld child ID:%ld\n",
- 	i, (long)getpid(), (long)getppid(), (long)childpid);
- 	return 0;
+	return 0;
 }
+
+	
+ /*	n = atoi(argv[1]); */
+
+	
+
 
 
