@@ -1,8 +1,15 @@
+/*
+Shaon Islam
+CS 4760: Operating Systems
+Project 1
+September 2018
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
-
+#include <getopt.h>
 
 
 /* User getopt: 
@@ -12,48 +19,34 @@
 */
 
 
-
-
-
-
 int main (int argc, char *argv[]) 
 {
 	pid_t childpid = 0;
 	int i, n; 	
-	int helpflag;
-	int errorflag;
-	char option;
 
 	/* Attempt 1 at get opt */
 	/* optopt: when getopt stumbles on an unknown option char or with a missing arg */
 
+	int option;
 
-	option = getopt (argc, argv, "h");
-
-	while(option != -1)
+	while((option = getopt(argc, argv, "hpn")) != -1)
 	{
 		switch (option)
 			{
 			case 'h':
-				helpflag = 1;
+				fprintf(stderr, "You have selected H");
 				break;	
-			case '?':
-				errorflag = 1;
+			case 'p':
+				fprintf(stderr, "You have selected P");
 				break;
-
+			case 'n':
+                                fprintf(stderr, "You have selected N");
+                                break;
+			case '?':
+				fprintf(stderr, "Error");
+				break;
 			}
 	}
-
-
-	if (helpflag == 1)
-	{
-		fprintf(stderr, "HELP MESSAGE");
-	}
-
-	if (errorflag == 1)
-        {
-                fprintf(stderr, "ERROR  MESSAGE");
-        }
 
 
 	if (argc != 2)
