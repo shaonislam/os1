@@ -18,18 +18,22 @@ void processes(int n, pid_t childpid)
         int i;
         for (i = 1; i < n; i++)  
                 if ((childpid = fork()))
-                        break;
-                                
+                        break;                                
         fprintf(stderr, "i:%d process ID:%ld parent ID:%ld child ID:%ld\n",i, (long)getpid(), (long)getppid(), (long)childpid);
 }
     
 
-
-/* something different */
 int main (int argc, char *argv[]) 
 {
 	pid_t childpid = 0;
 	int option;
+
+	if (argc != 2)
+        {
+                /* check for valid number of command-line arguments */
+                fprintf(stderr, "Usage: %s processes\n", argv[0]);
+        }
+
 
 	while((option = getopt(argc, argv, "hpn:")) != -1)
 	{
@@ -55,20 +59,8 @@ int main (int argc, char *argv[])
 			}
 	}
 
-
-	if (argc != 2)
-	{ 
-		/* check for valid number of command-line arguments */
- 		fprintf(stderr, "Usage: %s processes\n", argv[0]);
- 		return 1;
- 	}
-
 	return 0;
 }
-
-	
- /*	n = atoi(argv[1]); */
-
 	
 
 
