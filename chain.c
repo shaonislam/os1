@@ -25,7 +25,7 @@ void processes(int n, pid_t childpid)
     
 
 
-
+/* something different */
 int main (int argc, char *argv[]) 
 {
 	pid_t childpid = 0;
