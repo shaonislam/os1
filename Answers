@@ -1,0 +1,78 @@
+Shaon Islam
+CS 4760: OS Project 1
+September 2018
+3.8 Exerise Process Chains
+
+ANSWERS:
+
+1) Run Program 3.1 and observe the results for different number of processes
+
+	The one clear thing I noticed is that proportion of ppids equalling 1 was always roughly the same no matter how big or little processes there were.
+	If I ran 5 processes, there's 1 ppid = 1.
+	Running 10, then there's 2 ppid = 1.
+	Running 20, then there's 5 ppid = 1.
+	40, then around 8 ppid = 1.
+	100, the 28 ppid = 1.
+
+	Roughly 20-28% of the processes have had parent's that have already completed and exited thus leaving the child processed to be taken in under init
+	which is process id of 1. As the number of processes increased the proportion slowly grew.
+
+
+
+2) Fill in the actual process IDs of the processes in the diagram Figure 3.2 for a run with command-line argument value of 4.	
+
+	26421 -> 26422 -> 26423 -> 26424 
+	
+
+3) Experiment with different values for the command-line argument to find out the largest number of processes that the program can generate. 
+   Observe the fraction that are adopted by init.
+	Experimenting with very large numbers in the command line starting at 1000 and doubling
+	each time and after looking up the pid_max by 'cat /proc/sys/kernel/pid_max' 
+	we get 32768.
+	The fraction of these processes that were adopted by init (having a parent id of 1) grew
+	as the processes grew -please see answer to question 1.
+
+4) Place sleep(10); directly before the final fprintf statement in Program 3.1. What is the maximum number of processes generated in this case?
+
+	Maximum number of processes generated is 25. Any number of processs ordered over 25 results 
+	in the brief pause and the program times itself out, otherwise number of processes less than
+	25 inclusive is all generated, followed by the same brief pause and then program exits.
+
+5) Put a loop around the final frprintf in Program 3.1. Have the loop execute k times. Put sleem(m); inside this loop after the fprintf.
+   Pass k and m on the command line. Run the program for several values of n, k and m. Observe the results.
+
+	Observed results, program wont process more than 25 processes at a time. 
+	it just repeats the same n number of processes (only the first 25) for k number
+	of times even if m is just 1 second. The program prints a set of processes, sleeps
+	and then prints and this repeats k number of times. 	
+
+
+6) Modify Program 3.1 by putting a wait function call before the final fprintf statement. 
+   How does this affect the output of the program?
+
+	Processes are only going up to 25 processes, no more. But none of the processed are being adopted! 
+	None of the children have a parent id of 1. Thus meaning because of the wait function call,
+	the parent's aren't completeing before their children.	
+
+
+7) Modify Program 3.1 by replacing the final fprintf statement with four fprintf statements, one each for the four integers displayed.
+   Only the last one should output a newline. What happends when you run this program? Can you tell which process generated each part of the output?
+   Run the program several times and see if there is a difference in the output.
+
+	As the number of processes grew, a whole lot more processes have had 
+	parents complete before children with parent IDs being 1 for more 
+	than half the time when running 10000 processes but process amount
+	stopped at 280. Definitely some mix up among the processes and their order as well.
+
+	
+
+
+8) Modify Program 3.1 by replacing the final fprintf statement with a loop that reads nchars characters from standards input, one character at a time,
+   and puts them in an array called mybuf. The values of n and nchars should be passes as command-line arguments. After the loop, put a '\0' character in
+   entry nchars of the array so that it contains a string. Output to standard error in a single fprintf the process ID followed by a colon followed by  the 
+   string in mybuf. Run the program for several values of n and nchars. Observe the results. Press the Return key often and continue typing at the keyboard 
+   until all of the processes have exited.
+
+
+
+

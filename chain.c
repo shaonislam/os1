@@ -17,9 +17,12 @@ void processes(int n, pid_t childpid)
 {
         int i;
         for (i = 1; i < n; i++)  
-                if ((childpid = fork()))
+        {        
+		if ((childpid = fork()))
                         break;                                
-        fprintf(stderr, "i:%d process ID:%ld parent ID:%ld child ID:%ld\n",i, (long)getpid(), (long)getppid(), (long)childpid);
+        	fprintf(stderr, "i:%d 	process ID:%ld 	parent ID:%ld 	child ID:%ld\n",i, (long)getpid(), (long)getppid(), (long)childpid);
+	}
+	
 }
     
 
@@ -58,6 +61,8 @@ int main (int argc, char *argv[])
 				break;
 			}
 	}
+
+
 
 	return 0;
 }
