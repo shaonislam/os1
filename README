@@ -1,0 +1,55 @@
+Shaon Islam
+CS 4760: Project 1
+Unix Systems Calls and Library Functions
+
+
+
+Task 1: Makefile (makefile)
+
+	Creating a makefile which creates an executuble (ass1) and an object (.o) file.
+	How to execute: simple write 'make'
+	How to clean out executable and .o file: 'make clean'
+
+	-Creating the makefile was easy, I used a makefile I made for 2750 
+	as a reference and deleted and filled in the necessary information I needed.
+
+Task 2: Version Control (.git)
+
+	Used git as the version control.
+	Seeing what files are included: 'git status'
+	Reading all commits: 'git log'
+
+	-Setting up this version control was a little confusing, as I barely have any experience
+	working with git. Though, after working on it for a bit through this project
+	I would say it's a little more clear into the understanding of how its backgournd
+	works.
+
+Task 3: Modified 3.1 Program (file.c)
+	
+	finalProcess.c with an executable set to ass1 (as seen in makefile) includes getopt 
+	and perror as specified in Task 3. This program uses Program 3.1 simplechain.c as
+	a foundation. It provides options such as -h, -n x, and -p.
+	
+	To execute this file, makefile must be executed first. This creates the executable, ass1,
+	then the user has the following options for a valid execution.
+	
+	ass1 -h   : Displays a help message showing the valid inputs and then execute the program
+	ass1 -n x : x would be an integer that the program would use to create x number of processes 
+	ass1 -p	  : Displays the executable along with the specified  test error messaged.
+
+	-Modifying this program wasn't too bad. Had to research getopt a lot to figure out how it
+	works to implement it properly. Turns out its a very useful and time saving.
+
+Task 4: Error Message (file.c)
+
+	Task 4 simply specifies on -p in Task 3. Stating that -p should generate perror message in the
+	following the executable statement.  
+
+Task 5: Exercise Questions (ANSWERS)
+
+	Going through questions of the 3.8 Exercise #1-#8. Answers can be found in ANSWERS.
+	#1-#7 was good, easy to implement because it only needed a few lines of code. Wish there was
+	prewritten tests that were given to execute so maybe the observances would be a bit more
+	uniform. #8 took awhile to figure out, still not sure if it's working as needed. The result
+	was out of order at times and the mybuf printed only a few of the strings being interrupted 
+	by the processes. Thorough answers to the questions can both be found in the Answers text file.

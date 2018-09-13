@@ -26,6 +26,7 @@ ANSWERS:
 
 3) Experiment with different values for the command-line argument to find out the largest number of processes that the program can generate. 
    Observe the fraction that are adopted by init.
+
 	Experimenting with very large numbers in the command line starting at 1000 and doubling
 	each time and after looking up the pid_max by 'cat /proc/sys/kernel/pid_max' 
 	we get 32768.
@@ -74,5 +75,9 @@ ANSWERS:
    until all of the processes have exited.
 
 
-
+	This was pretty odd to test out, wish there was a clearer way to help understand
+	what is actually going on here. As the number of processes got bigger they
+	kept skipping a few process numbers, and the order was disrupted even as mybuf
+	was taking in the strings and printing out the processes were not sequential
+	but were fine as the processes number decreased.  
 
